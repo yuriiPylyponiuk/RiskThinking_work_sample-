@@ -1,28 +1,40 @@
 "use client";
-/* eslint-disable react/jsx-no-comment-textnodes */
-//@ts-nocheck
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import MapComponent from "../components/MapComponent";
-const DEFAULT_CENTER = [38.907132, -77.036546];
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Map } from "../features/Map";
+
+import list from "../../sampleData.json";
+
 export default function Home() {
+  const [decade, setDecade] = useState("2030");
+  const [filteredList, setfilteredList] = useState(list);
+
+  useEffect(() => {
+    filterList(decade);
+  }, []);
+
+  const filterList = (value: string) => {
+    const decadeList = list.filter((item) => item.Year === value);
+    setfilteredList(decadeList);
+    setDecade(value);
+  };
+
   return (
     <div>
       <h1>Test exercise</h1>
-      <MapComponent width="800" height="400" center={DEFAULT_CENTER} zoom={12}>
-        {({ TileLayer, Marker, Popup }) => (
-          <>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={DEFAULT_CENTER}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </>
-        )}
-      </MapComponent>
+      <select
+        value={decade}
+        onChange={(e) => filterList(e.target.value)}
+        className="text-black"
+      >
+        <option value="2030">2030</option>
+        <option value="2040">2040</option>
+        <option value="2050">2050</option>
+        <option value="2060">2060</option>
+        <option value="2070">2070</option>
+      </select>
+      <Link href="/test">Home</Link>
+      <Map list={filteredList} />
     </div>
   );
 }
