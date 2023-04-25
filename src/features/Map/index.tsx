@@ -41,7 +41,7 @@ export const Map: FC<MapPropsType> = ({ list }) => {
   };
 
   return (
-    <div>
+    <div className="w-4/6 mx-auto mt-14">
       <MapComponent
         width="1000"
         height="600"

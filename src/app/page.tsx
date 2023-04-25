@@ -1,40 +1,25 @@
-"use client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Map } from "../features/Map";
+import { Navigation } from "@/components/NavigationComponent";
 
-import list from "../../sampleData.json";
-
-export default function Home() {
-  const [decade, setDecade] = useState("2030");
-  const [filteredList, setfilteredList] = useState(list);
-
-  useEffect(() => {
-    filterList(decade);
-  }, []);
-
-  const filterList = (value: string) => {
-    const decadeList = list.filter((item) => item.Year === value);
-    setfilteredList(decadeList);
-    setDecade(value);
-  };
-
+const Home = () => {
   return (
-    <div>
-      <h1>Test exercise</h1>
-      <select
-        value={decade}
-        onChange={(e) => filterList(e.target.value)}
-        className="text-black"
-      >
-        <option value="2030">2030</option>
-        <option value="2040">2040</option>
-        <option value="2050">2050</option>
-        <option value="2060">2060</option>
-        <option value="2070">2070</option>
-      </select>
-      <Link href="/test">Home</Link>
-      <Map list={filteredList} />
+    <div className="flex flex-col">
+      <div className="flex justify-between w-8/12 m-auto mt-16">
+        <div className="">
+          <h1 className="text-4xl">Yurii Pylyponiuk</h1>
+          <h2 className="text-1xl">Front-end web developer</h2>
+        </div>
+        <div>
+          <p className="text-2xl">Contacts:</p>
+          <p>Phone Number: +1(236) 889-1757</p>
+          <p>Email: yuriipylyponiuk@gmail.com</p>
+        </div>
+      </div>
+      <p className="self-center mt-10 text-2xl">
+        Work Sample for UI/UX Developers
+      </p>
+      <Navigation />
     </div>
   );
-}
+};
+
+export default Home;
