@@ -3,43 +3,7 @@ import { MapComponent } from "../../components/MapComponent";
 import { List, MapPropsType } from "./types";
 const DEFAULT_CENTER = [55.907132, -99.036546];
 
-import * as Leaflet from "leaflet";
-
 export const Map: FC<MapPropsType> = ({ list }) => {
-  const createColorMarker = (risk: string) => {
-    const riskNum = Number(risk);
-    let myCustomColour = "red";
-
-    if (riskNum < 0.25) {
-      myCustomColour = "green";
-    } else if (riskNum > 0.25 && riskNum < 0.5) {
-      myCustomColour = "blue";
-    } else {
-      myCustomColour = "red";
-    }
-
-    const markerHtmlStyles = `
-    background-color: ${myCustomColour};
-    width: 2rem;
-    height: 2rem;
-    display: block;
-    left: -1.5rem;
-    top: -1.5rem;
-    position: relative;
-    border-radius: 2rem 2rem 0;
-    transform: rotate(45deg);
-    border: 1px solid #000`;
-
-    const icon = Leaflet.divIcon({
-      className: "my-custom-pin",
-      iconAnchor: [0, 24],
-      popupAnchor: [0, -36],
-      html: `<span style="${markerHtmlStyles}" />`,
-    });
-
-    return icon;
-  };
-
   return (
     <div className="w-4/6 mx-auto mt-14">
       <MapComponent
@@ -55,12 +19,10 @@ export const Map: FC<MapPropsType> = ({ list }) => {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             {list.map((item: any, index: number) => {
-              const icon = createColorMarker(item["Risk Rating"]);
               return (
                 <Marker
                   style={{ filter: `hue-rotate(${-139}deg)` }}
                   key={index}
-                  icon={icon}
                   position={[item.Lat, item.Long]}
                 >
                   <Popup sryle={{ color: "red" }}>

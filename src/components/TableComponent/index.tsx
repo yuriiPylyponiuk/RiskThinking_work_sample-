@@ -83,7 +83,7 @@ const BasicTable: FC<ComponentProps> = ({ list, COLUMNS }) => {
     if (data === sortKey) {
       return (
         <img
-          className=" right-0 w-3 absolute top-1/2 rotate-180 -translate-y-2/4"
+          className=" right-10 w-3 absolute top-1/2 rotate-180 -translate-y-2/4"
           src="/favicon.ico"
           alt="Icon"
         />
@@ -91,7 +91,7 @@ const BasicTable: FC<ComponentProps> = ({ list, COLUMNS }) => {
     } else {
       return (
         <img
-          className=" right-0 w-3 absolute top-1/2  -translate-y-2/4"
+          className=" right-10 w-3 absolute top-1/2  -translate-y-2/4"
           src="/favicon.ico"
           alt="Icon"
         />
